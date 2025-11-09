@@ -7,6 +7,7 @@
 namespace Isopoh.Cryptography.Argon2
 {
     using System;
+    using System.Security.Cryptography;
     using Isopoh.Cryptography.SecureArray;
 
     /// <summary>
@@ -65,13 +66,24 @@ namespace Isopoh.Cryptography.Argon2
         #nullable restore
 
         /// <summary>
-        /// Gets or sets the salt used in the password hash. If non-null, must be at least 8 bytes.
+        /// Gets or sets the salt used in the password hash. Must be at least 8 bytes.
+        /// If no salt is given, a random one will be generated.
         /// </summary>
         #nullable enable
-        public byte[]? Salt
+        public byte[] Salt
         #nullable restore
         {
-            get => this.salt;
+            get
+            {
+                if (this.salt == null)
+                {
+                    this.salt = new byte[16];
+                    using var randomNumberGenerator = RandomNumberGenerator.Create();
+                    randomNumberGenerator.GetBytes(this.salt);
+                }
+
+                return this.salt;
+            }
 
             set
             {

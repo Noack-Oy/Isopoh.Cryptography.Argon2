@@ -14,6 +14,7 @@ using Argon2;
 using SecureArray;
 using Xunit;
 using Xunit.Abstractions;
+using System.Text;
 
 /// <summary>
 /// Unit tests for Isopoh.Cryptography.Argon2.
@@ -136,5 +137,17 @@ public class UnitTests
     {
         var (passed, text) = HighMemoryCost.Test(this.output);
         Assert.True(passed, text);
+    }
+
+    [Fact]
+    public void ConfigWithoutSalt()
+    {
+        string password = "password";
+        var config = new Argon2Config()
+        {
+            Password = Encoding.UTF8.GetBytes(password),
+        };
+        string hash = Argon2.Hash(config);
+        Assert.True(Argon2.Verify(hash, password));
     }
 }

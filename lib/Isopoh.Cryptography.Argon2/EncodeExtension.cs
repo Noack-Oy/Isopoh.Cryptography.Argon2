@@ -107,11 +107,6 @@ namespace Isopoh.Cryptography.Argon2
 ////                dst.Append(config.AssociatedData.ToB64String());
 ////            }
 
-            if (config.Salt == null || config.Salt.Length == 0)
-            {
-                return dst.ToString();
-            }
-
             dst.Append('$');
             dst.Append(config.Salt.ToB64String());
 

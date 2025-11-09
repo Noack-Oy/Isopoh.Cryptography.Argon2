@@ -41,6 +41,7 @@ public static class ThreadsDontMatter
             Type = Argon2Type.DataIndependentAddressing,
             Version = Argon2Version.Nineteen,
             Password = passwordBytes,
+            Salt = configA.Salt,
             TimeCost = 3,
             MemoryCost = 32,
             Lanes = 4,

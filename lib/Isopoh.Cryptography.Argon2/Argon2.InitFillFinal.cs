@@ -64,12 +64,9 @@ namespace Isopoh.Cryptography.Argon2
                 }
             }
 
-            Store32(value, this.config.Salt?.Length ?? 0);
+            Store32(value, this.config.Salt.Length);
             blakeHash.Update(value);
-            if (this.config.Salt != null)
-            {
-                blakeHash.Update(this.config.Salt);
-            }
+            blakeHash.Update(this.config.Salt);
 
             Store32(value, this.config.Secret?.Length ?? 0);
             blakeHash.Update(value);

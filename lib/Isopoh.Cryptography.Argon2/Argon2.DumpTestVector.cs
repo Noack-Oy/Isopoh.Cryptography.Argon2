@@ -46,8 +46,8 @@ namespace Isopoh.Cryptography.Argon2
                     : BitConverter.ToString(hasher.config.Password ?? Array.Empty<byte>()).ToLowerInvariant().Replace('-', ' ');
                 streamOut.WriteLine($"Password[{hasher.config.Password?.Length ?? -1}]: {pwText} ");
                 streamOut.WriteLine(
-                    $"Salt[{hasher.config.Salt?.Length ?? 0}]: "
-                    + $"{(hasher.config.Salt == null ? string.Empty : BitConverter.ToString(hasher.config.Salt).ToLowerInvariant().Replace('-', ' '))} ");
+                    $"Salt[{hasher.config.Salt.Length}]: "
+                    + $"{BitConverter.ToString(hasher.config.Salt).ToLowerInvariant().Replace('-', ' ')} ");
                 streamOut.WriteLine(
                     $"Secret[{hasher.config.Secret?.Length ?? 0}]: "
                     + $"{(hasher.config.Secret == null ? string.Empty : BitConverter.ToString(hasher.config.Secret).ToLowerInvariant().Replace('-', ' '))} ");
